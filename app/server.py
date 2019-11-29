@@ -9,15 +9,16 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 
-#export_file_url = 'https://drive.google.com/uc?export=download&id=1EQBlYB7cUKoVc1SABB65McnPzjrQsNsX'
+#export_file_url = 'https://drive.google.com/uc?export=download&id=1voiXqG48h4xJNRyy-a72A6K-WC8TEBfv'
 export_file_url = None
 
 # download of big files in google drive needs a confirmation step, set this variable instead of url
-export_file_google_drive_id="1EQBlYB7cUKoVc1SABB65McnPzjrQsNsX"
+#https://drive.google.com/file/d/1voiXqG48h4xJNRyy-a72A6K-WC8TEBfv/view?usp=sharing
+export_file_google_drive_id="1voiXqG48h4xJNRyy-a72A6K-WC8TEBfv"
 
 export_file_name = 'export.pkl'
 
-classes = ['Direito', 'Economia', 'Social']
+# classes = ['Direito', 'Economia', 'Social']
 path = Path(__file__).parent
 
 app = Starlette()
@@ -73,11 +74,11 @@ async def analyze(request):
 
     print(str(prediction))
 
-    probs = [{ 'classe': classes[i], 'probabilidade': prediction[2][i].item() } for i in range(len(prediction[2]))]
+    probs = [{ 'classe': learn.data.classes[i], 'probabilidade': prediction[2][i].item() } for i in range(len(prediction[2]))]
 
     result = {
         'idx_classe': idx_classe,
-        'nome_classe': classes[idx_classe],
+        'nome_classe': learn.data.classes[idx_classe],
         'probabilidade': prediction[2][idx_classe].item(),
         'lista_prob': probs
     }
