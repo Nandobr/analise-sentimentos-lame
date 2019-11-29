@@ -1,8 +1,8 @@
 FROM python:3.7-slim-stretch
 
 LABEL version="1.0.0" \
-    description="Serviço REST para classificação de texto de solicitações da consultoria do Senado" \
-    maintainer="Senado Federal"
+    description="Serviço REST para classificação de sentimento Lojas Americanas" \
+    maintainer="Fernando Melo"
 
 RUN apt-get update && apt-get install -y git python3-dev gcc \
     && rm -rf /var/lib/apt/lists/*
